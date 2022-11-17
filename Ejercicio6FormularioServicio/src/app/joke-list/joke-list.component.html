@@ -1,0 +1,2 @@
+<app-joke-form (crearChiste)="addJoke($event)"></app-joke-form>
+<app-joke *ngFor="let j of jokes" [joke]="j" class="container m-t-3" ></app-joke>

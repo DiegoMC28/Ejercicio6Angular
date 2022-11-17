@@ -1,0 +1,23 @@
+<form [formGroup]="myForm" novalidate>
+    <div class="card card-block">
+        <h4 class="card-title">Create Joke</h4>
+        <div class="form-group" formGroupName="enunciado">
+            <input type="text"
+            class="form-control"
+            formControlName="setup"
+            placeholder="Enter the setup"
+            #pregunta><!--Variable local que esta haciendo referencia al input, agarrando ese objeto.-->
+        </div>
+        <div class="form-group" formGroupName="respuesta">
+            <input type="text"
+            class="form-control"
+            formControlName="punchline"
+            placeholder="Enter the punchline"
+            #respuesta><!--Variable local que esta haciendo referencia al input, agarrando ese objeto.-->
+        </div>
+        <button type="button"
+        class="btn btn-primary"
+        (click)="createJoke(pregunta.value, respuesta.value)">Create
+        </button>
+    </div>
+</form>
