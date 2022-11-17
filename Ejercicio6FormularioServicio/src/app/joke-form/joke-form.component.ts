@@ -9,34 +9,31 @@ import { Joke } from 'src/modelo/joke';
 })
 export class JokeFormComponent implements OnInit {
 
-  myForm: FormGroup;
+  myForm!: FormGroup;
   
-  constructor() { }
+  @Output() crearChiste:EventEmitter<Joke> = new EventEmitter<Joke>();
+
+  constructor() { 
+    }
 
   ngOnInit(){
     
     this.myForm = new FormGroup({
       enunciado: new FormGroup({
-        setup: new FormControl('', [Validators.required, Validators.minLength(4)])
+        setup: new FormControl('', [Validators.required, Validators.minLength(6)])
       }),
       respuesta: new FormGroup({
         punchline: new FormControl('', Validators.required)
-      })
-      
+      })      
     });
 
   }
 
-  @Output() crearChiste:EventEmitter<Joke> = new EventEmitter<Joke>();
-  
-  
 
   createJoke(setup: string, punchline: string) {
     let chisteNuevo:Joke = new Joke(setup, punchline);
     this.crearChiste.emit(chisteNuevo);
-    this.myForm.controls.setup.valid;
-
-
+    //this.myForm.controls.setup.valid;
   }
   
 }
