@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Joke } from 'src/modelo/joke';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-joke-form',
@@ -33,7 +34,9 @@ export class JokeFormComponent implements OnInit {
   createJoke(setup: string, punchline: string) {
     let chisteNuevo:Joke = new Joke(setup, punchline);
     this.crearChiste.emit(chisteNuevo);
-    //this.myForm.valid;
+    this.myForm.get('setup')?.valid;
+   
+    
   }
   
 }
