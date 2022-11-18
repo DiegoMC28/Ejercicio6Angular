@@ -33,7 +33,7 @@ export class JokeFormComponent implements OnInit {
   createJoke(setup: string, punchline: string) {
     let chisteNuevo:Joke = new Joke(setup, punchline);
     this.crearChiste.emit(chisteNuevo);
-    //this.myForm.controls.setup.valid;
+    //this.myForm.valid;
   }
   
 }
