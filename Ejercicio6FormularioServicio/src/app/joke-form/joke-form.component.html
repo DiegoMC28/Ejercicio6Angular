@@ -1,20 +1,24 @@
 <form [formGroup]="myForm" novalidate>
     <div class="card card-block">
         <h4 class="card-title">Create Joke</h4>
-        <div class="form-group" formGroupName="enunciado">
+        <div class="form-group">
             <input type="text"
             class="form-control"
+            [ngClass]="{'error': this.setup.invalid && this.setup.dirty}"
             formControlName="setup"
             placeholder="Enter the setup"
             #pregunta><!--Variable local que esta haciendo referencia al input, agarrando ese objeto.-->
         </div>
-        <div class="form-group" formGroupName="respuesta">
+        <div class="form-group">
             <input type="text"
             class="form-control"
+            [ngClass]="{'error': this.punchline.invalid && this.punchline.dirty}"
             formControlName="punchline"
             placeholder="Enter the punchline"
             #respuesta><!--Variable local que esta haciendo referencia al input, agarrando ese objeto.-->
         </div>
+        <div *ngIf="this.punchline.invalid && this.punchline.dirty">Tienes que poner un punchline de 6 caracteres como minimo</div>
+        <div *ngIf="this.setup.invalid && this.setup.dirty">Tienes que poner un setup de 6 caracteres como minimo</div>
         <button type="button"
         class="btn btn-primary"
         (click)="createJoke(pregunta.value, respuesta.value)">Create
