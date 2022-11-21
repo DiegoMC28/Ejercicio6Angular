@@ -12,8 +12,8 @@ import { VirtualTimeScheduler } from 'rxjs';
 export class JokeFormComponent implements OnInit {
 
   myForm!: FormGroup;
-  setup!: FormControl;
-  punchline!: FormControl;
+  setupControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
+  punchlineControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   
   @Output() crearChiste:EventEmitter<Joke> = new EventEmitter<Joke>();
 
@@ -22,13 +22,12 @@ export class JokeFormComponent implements OnInit {
 
   ngOnInit(){
     
-    this.setup = new FormControl('', [Validators.required, Validators.minLength(6)]);
-    this.punchline = new FormControl('', Validators.required);
+  
 
 
     this.myForm = new FormGroup({
-       setup: this.setup,
-      punchline: this.punchline      
+       setup: this.setupControl,
+      punchline: this.punchlineControl      
     });
 
   }
@@ -37,9 +36,9 @@ export class JokeFormComponent implements OnInit {
   createJoke(setup: string, punchline: string) {
 
     this.myForm.valid;
-    this.setup?.valid;
-    this.punchline?.valid;
-    if(this.myForm.valid && this.setup?.valid && this.punchline?.valid){
+    this.setupControl?.valid;
+    this.punchlineControl?.valid;
+    if(this.myForm.valid && this.setupControl?.valid && this.punchlineControl?.valid){
       let chisteNuevo:Joke = new Joke(setup, punchline);
       this.crearChiste.emit(chisteNuevo);
     }
