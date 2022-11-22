@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Joke } from 'src/modelo/joke';
-import { ReactiveFormsModule } from '@angular/forms';
-import { VirtualTimeScheduler } from 'rxjs';
+import { JokeServiceService } from 'src/modelo/joke-service.service';
 
 @Component({
   selector: 'app-joke-form',
@@ -15,9 +14,9 @@ export class JokeFormComponent implements OnInit {
   setupControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   punchlineControl: FormControl = new FormControl('', [Validators.required, Validators.minLength(6)]);
   
-  @Output() crearChiste:EventEmitter<Joke> = new EventEmitter<Joke>();
+  //@Output() crearChiste:EventEmitter<Joke> = new EventEmitter<Joke>();
 
-  constructor() { 
+  constructor(private servicio: JokeServiceService) { 
     }
 
   ngOnInit(){
@@ -40,7 +39,7 @@ export class JokeFormComponent implements OnInit {
     this.punchlineControl?.valid;
     if(this.myForm.valid && this.setupControl?.valid && this.punchlineControl?.valid){
       let chisteNuevo:Joke = new Joke(setup, punchline);
-      this.crearChiste.emit(chisteNuevo);
+      this.servicio.añadirChistes(chisteNuevo);
     }
     
     
