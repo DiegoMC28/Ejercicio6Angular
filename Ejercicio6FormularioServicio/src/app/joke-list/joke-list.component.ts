@@ -7,11 +7,19 @@ import { JokeServiceService } from 'src/modelo/joke-service.service';
   templateUrl: './joke-list.component.html',
   styleUrls: ['./joke-list.component.css']
 })
-export class JokeListComponent {
+export class JokeListComponent implements OnInit {
 
-  jokes: Joke[];
+  joke: Joke = new Joke('', '');
+  jokes!: Joke[];
+
   constructor(private servicio: JokeServiceService) {
-    this.jokes = servicio.obtenerChistes();
+    this.jokes = this.servicio.jokes;
+    this.servicio.jokes$.subscribe( jokes => this.jokes = jokes );
+  }
+
+  ngOnInit(): void {
+    this.jokes = this.servicio.jokes;
+    this.servicio.jokes$.subscribe( jokes => this.jokes = jokes );
   }
 
   //addJoke(joke: Joke) {
