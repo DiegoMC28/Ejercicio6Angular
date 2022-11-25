@@ -37,7 +37,7 @@ export class JokeFormComponent implements OnInit {
     this.myForm.valid;
     this.setupControl?.valid;
     this.punchlineControl?.valid;
-    if(this.myForm.valid && this.setupControl?.valid && this.punchlineControl?.valid){
+    if(this.myForm.valid){
       let chisteNuevo:Joke = new Joke(setup, punchline);
       this.servicio.añadirChiste(chisteNuevo);
     }
